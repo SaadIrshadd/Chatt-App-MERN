@@ -6,7 +6,3 @@ export const axiosInstance = axios.create({
     withCredentials: true
 })
 
-export const axiosInstance = axios.create({
-  baseURL: BASE_URL,
-  withCredentials: true // required to send cookies/auth
-});
