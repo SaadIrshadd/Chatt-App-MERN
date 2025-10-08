@@ -15,7 +15,6 @@ export const generateToken = (userId, res) =>{
         httpOnly: true,
         sameSite: "none",
         secure: true,
-        domain: ".vercel.app"
     });
 
     return token;
@@ -26,7 +25,6 @@ export const clearToken = (res) => {
         maxAge: 0, // expire immediately
         httpOnly: true,
         secure: process.env.NODE_ENV === "production", // true in prod
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-        domain: ".vercel.app"
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "strict"
     });
 };
