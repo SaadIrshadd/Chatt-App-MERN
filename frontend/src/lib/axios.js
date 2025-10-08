@@ -5,3 +5,8 @@ export const axiosInstance = axios.create({
     import.meta.env.VITE_API_URL + "/api",
     withCredentials: true
 })
+
+export const axiosInstance = axios.create({
+  baseURL: BASE_URL,
+  withCredentials: true // required to send cookies/auth
+});

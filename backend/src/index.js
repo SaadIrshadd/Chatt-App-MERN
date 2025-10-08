@@ -24,6 +24,7 @@ app.use(cors({
     "https://chatt-app-mern.vercel.app"    // your deployed frontend
   ],
   credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 }));
 
 
