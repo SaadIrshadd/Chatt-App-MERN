@@ -18,12 +18,13 @@ const __dirname = path.resolve();
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
-app.use(
-    cors({
-        origin: "*",
-        credentials: true
-    })
-);
+app.use(cors({
+  origin: [
+    "http://localhost:5173",               // for local dev
+    "https://chatt-app-mern.vercel.app"    // your deployed frontend
+  ],
+  credentials: true,
+}));
 
 
 //ROUTES
