@@ -6,7 +6,7 @@ import { RiEmojiStickerLine } from 'react-icons/ri';
 import EmojiPicker from 'emoji-picker-react';
 import { Loader } from 'lucide-react'
 
-
+const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 const MessageInput = () => {
     const [text, setText] = useState("");
@@ -111,31 +111,35 @@ return (
             />
             <div className="relative">
             
-            <button
-                className={`btn btn-circle`}
-                onClick={handleEmoji}
-                type="button"
-            >
-                <RiEmojiStickerLine size={20} />
-            </button>
-
-            {emoji && (
-                <div className="absolute bottom-full right-0 mb-2 z-50">
-                <EmojiPicker
-                    height={350} width={300}
-                    onEmojiClick={(emojiData) => {
-                    setText((prev) => prev + emojiData.emoji);
-                    setEmoji(false); 
-                    }}
-                    lazyLoadEmojis='false'
-                    skinTonesDisabled="true"
-                    searchDisabled="true"
-                    showPreview="false" 
-                    emojiStyle="google"               
-                />
-                </div>
-            )}
+            {!isMobile && (
+    <>
+      <button
+        className="btn btn-circle"
+        onClick={handleEmoji}
+        type="button"
+      >
+        <RiEmojiStickerLine size={20} />
+      </button>
+        {emoji && (
+            <div className="absolute bottom-full right-0 mb-2 z-50">
+            <EmojiPicker
+                height={350}
+                width={300}
+                onEmojiClick={(emojiData) => {
+                setText((prev) => prev + emojiData.emoji);
+                setEmoji(false);
+                }}
+                lazyLoadEmojis={false}
+                skinTonesDisabled={true}
+                searchDisabled={true}
+                showPreview={false}
+                emojiStyle="google"
+            />
             </div>
+        )}
+        </>
+        )}
+        </div>
             <button
                 type="button"
                 className={`btn btn-circle ${imagePreview ? "text-emerald-500" : "text-zinc-400"}`}

@@ -35,16 +35,36 @@ export const useAuthStore = create((set,get) => ({
 
 
     signup: async (data) => {
-        const res = await axiosInstance.post("/auth/signup", data);
-        localStorage.setItem("chat-user", JSON.stringify(res.data));
-        set({ authUser: res.data });
+        set({ isSigningUp: true });
+        try {
+            const res = await axiosInstance.post("/auth/signup", data);
+            localStorage.setItem("chat-user", JSON.stringify(res.data));
+            set({ authUser: res.data });
+            toast.success("Account created successfully!");
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Signup failed");
+            console.log("Signup error:", error.response?.data);
+        } finally {
+            set({ isSigningUp: false });
+        }
     },
 
     login: async (data) => {
-        const res = await axiosInstance.post("/auth/login", data);
-        localStorage.setItem("chat-user", JSON.stringify(res.data));
-        set({ authUser: res.data });
+        set({ isLoggingIn: true });
+        try {
+            const res = await axiosInstance.post("/auth/login", data);
+            localStorage.setItem("chat-user", JSON.stringify(res.data));
+            set({ authUser: res.data });
+            toast.success("Login successful!");
+            get().connectSocket();
+        } catch (error) {
+            console.error("Login error:", error);
+            toast.error(error.response?.data?.message || "Login failed");
+        } finally {
+            set({ isLoggingIn: false });
+        }
     },
+
     
     logout: async () => {
         try {
