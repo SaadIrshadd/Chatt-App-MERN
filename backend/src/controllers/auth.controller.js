@@ -2,7 +2,6 @@ import cloudinary from "../lib/cloudinary.js";
 import { generateToken } from "../lib/utils.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs"
-import { clearToken } from "../lib/utils.js"
 
 export const signup = async (req, res) => {
     const {fullName, email, password} = req.body
@@ -29,15 +28,16 @@ export const signup = async (req, res) => {
             password: hasedPass
         })
 
+        const token = generateToken(newUser._id);
         if(newUser){
-            generateToken(newUser._id, res);
             await newUser.save();
 
             res.status(201).json({ 
                 id:newUser._id,
                 fullName: newUser.fullName,
                 email: newUser.email,
-                profilePic: newUser.profilePic 
+                profilePic: newUser.profilePic,
+                token
             })
         }
         else{
@@ -65,12 +65,13 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Invalid Credentials" });
         }
 
-        generateToken(user._id,res);
-        res.status(200).json({
+        const token = generateToken(user._id);
+            res.status(200).json({
             _id: user._id,
             fullName: user.fullName,
             email: user.email,
-            profilePic: user.profilePic
+            profilePic: user.profilePic,
+            token
         });
 
     } catch (error) {
@@ -81,7 +82,6 @@ export const login = async (req, res) => {
 
 export const logout = (req, res) => {
     try {
-        clearToken(res);
         res.status(200).json({ message: "Logged Out Successfully" });
     
     } catch (error) {

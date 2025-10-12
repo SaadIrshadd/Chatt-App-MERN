@@ -16,70 +16,44 @@ export const useAuthStore = create((set,get) => ({
 
 
     isCheckingAuth: true,
-
-    checkAuth: async() => {
+    authUser: JSON.parse(localStorage.getItem("chat-user")) || null,
+    
+    checkAuth: async () => {
         try {
-            const res = await axiosInstance.get("/auth/check")
-            set({authUser: res.data})
-
+            const savedUser = JSON.parse(localStorage.getItem("chat-user"));
+            if (savedUser) {
+            set({ authUser: savedUser });
             get().connectSocket();
-
+            }
         } catch (error) {
-            console.log("Error in authCheck", error)
-            set({authUser: null})
-        
-        }finally{
-            set({ isCheckingAuth: false})
+            console.log("Error in checkAuth", error);
+            set({ authUser: null });
+        } finally {
+            set({ isCheckingAuth: false });
         }
     },
 
-    signUp: async(data) => {
-        set({ isSigningUp: true })
-        try {
-            const res = await axiosInstance.post("/auth/signup", data);
-            set({ authUser: res.data });
-            toast.success("Account created successfully.");
 
-            get().connectSocket();
-
-        } catch (error) {
-            toast.error(error.response.data.message);
-
-        }finally{
-            set({ isSigningUp: false});
-        }
+    signup: async (data) => {
+        const res = await axiosInstance.post("/auth/signup", data);
+        localStorage.setItem("chat-user", JSON.stringify(res.data));
+        set({ authUser: res.data });
     },
 
-    login: async(data) => {
-        set({ isLoggingIn: true });
-        try {
-            const res = await axiosInstance.post("/auth/login", data);
-            set({ authUser: res.data });
-            useChatStore.getState().setSelectedUser(null);
-            toast.success("Logged in successfully");
-
-            get().connectSocket();
-
-        } catch (error) {
-            toast.error(error.response.data.message);
-
-        }finally{
-            set({ isLoggingIn: false });
-        }
+    login: async (data) => {
+        const res = await axiosInstance.post("/auth/login", data);
+        localStorage.setItem("chat-user", JSON.stringify(res.data));
+        set({ authUser: res.data });
     },
     
-    logout: async() => {
+    logout: async () => {
         try {
             await axiosInstance.post("/auth/logout");
-            set({ authUser: null });
-            useChatStore.getState().setSelectedUser(null);
-            toast.success("Logged out successfully.");
-
-            get().disconnectSocket();
-
-        } catch (error) {
-            toast.error(error.response.data.message)
+        } catch (err) {
+            console.log("Logout error (ignored if offline)");
         }
+        localStorage.removeItem("chat-user");
+        set({ authUser: null });
     },
 
     updateProfile: async(data) => {
@@ -87,6 +61,7 @@ export const useAuthStore = create((set,get) => ({
         try {
             const res = await axiosInstance.put("/auth/update-profile", data);
             set({ authUser: res.data });
+            localStorage.setItem("chat-user", JSON.stringify(res.data));
             toast.success("Profile updated successfully");
         
         } catch (error) {
