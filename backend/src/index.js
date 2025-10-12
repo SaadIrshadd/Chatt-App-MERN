@@ -14,13 +14,11 @@ dotenv.config();
 const PORT = process.env.PORT;
 const __dirname = path.resolve();
 
-// ✅ Allowed frontend origins
 const allowedOrigins = [
-  "http://localhost:5173",               // Local dev
-  "https://chatt-app-mern.vercel.app"    // Deployed frontend
+  "http://localhost:5173",
+  "https://chatt-app-mern.vercel.app"
 ];
 
-// ✅ CORS middleware setup
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -33,14 +31,12 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 }));
 
-// ✅ Handle preflight requests globally
 app.options("*", cors());
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
 
-// ✅ ROUTES
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
