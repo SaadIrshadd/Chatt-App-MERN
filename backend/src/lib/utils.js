@@ -10,11 +10,11 @@ export const generateToken = (userId, res) =>{
     )
 
     //sending token as cookie
-    res.cookie("jwt", token, { 
-        maxAge: 7 * 24 * 60 * 60 * 1000, //MS
+    res.cookie("jwt", token, {
         httpOnly: true,
-        sameSite: "none",
-        secure: true,
+        secure: process.env.NODE_ENV === "production", // only true in production
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // crucial for cross-domain cookies
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
     return token;
@@ -22,9 +22,9 @@ export const generateToken = (userId, res) =>{
 
 export const clearToken = (res) => {
     res.cookie("jwt", "", {
-        maxAge: 0, // expire immediately
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // true in prod
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "strict"
-    });
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    expires: new Date(0),
+  });
 };
