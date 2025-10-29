@@ -1,4 +1,11 @@
 # ✨ Full Stack Realtime Chat App ✨
+
+### Live Demo
+https://chatt-app-mern.vercel.app
+
+![Screenshot](<img width="1366" height="768" alt="Chatty" src="https://github.com/user-attachments/assets/f6d9fc08-36d9-4f36-81c7-472f3ccd0a89" />
+ge.png)
+
 Highlights:
 - 🌟 Tech stack: MERN + Socket.io + TailwindCSS + Daisy UI
 - 🎃 Authentication && Authorization with JWT
@@ -9,7 +16,7 @@ Highlights:
 - ⭐ At the end Deployment like a pro for FREE!
 - ⏳ And much more!
 
-### Setup .env file (frontend)
+### Setup .env file (backend)
 
 ```js
 MONGODB_URI=...
@@ -49,6 +56,12 @@ zustand
 socket.io-client
 tailwindcss
 daisyui
+```
+### Clone and run
+
+```shell
+git clone <repo-url>
+cd project
 ```
 
 ### Build the app
