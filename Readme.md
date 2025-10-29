@@ -64,7 +64,7 @@ npm start
 ```
 
 ### Folder Structure
-
+```js
 ├── .gitignore
 ├── Readme.md
 ├── backend
@@ -135,3 +135,4 @@ npm start
     └── vite.config.js
 ├── package-lock.json
 └── package.json
+```
