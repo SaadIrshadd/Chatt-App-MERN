@@ -28,6 +28,7 @@ NODE_ENV=development
 ## Main Dependencies
 
 ### Backend
+```js
 express
 mongoose
 cors
@@ -47,7 +48,7 @@ zustand
 socket.io-client
 tailwindcss
 daisyui
-
+```
 
 ### Build the app
 
