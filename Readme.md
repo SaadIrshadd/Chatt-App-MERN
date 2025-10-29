@@ -2,8 +2,7 @@
 
 ### Live Demo
 https://chatt-app-mern.vercel.app
-
-![Screenshot](<img width="1366" height="768" alt="Chatty" src="https://github.com/user-attachments/assets/f6d9fc08-36d9-4f36-81c7-472f3ccd0a89" />
+(<img width="1366" height="768" alt="Chatty" src="https://github.com/user-attachments/assets/f6d9fc08-36d9-4f36-81c7-472f3ccd0a89" />
 ge.png)
 
 Highlights:
