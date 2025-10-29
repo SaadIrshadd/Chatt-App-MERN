@@ -2,10 +2,10 @@
 
 ### Live Demo
 https://chatt-app-mern.vercel.app
-(<img width="1366" height="768" alt="Chatty" src="https://github.com/user-attachments/assets/f6d9fc08-36d9-4f36-81c7-472f3ccd0a89" />
-ge.png)
+<img width="1366" height="768" alt="Chatty" src="https://github.com/user-attachments/assets/f6d9fc08-36d9-4f36-81c7-472f3ccd0a89" />
 
-Highlights:
+
+###Highlights:
 - 🌟 Tech stack: MERN + Socket.io + TailwindCSS + Daisy UI
 - 🎃 Authentication && Authorization with JWT
 - 👾 Real-time messaging with Socket.io
