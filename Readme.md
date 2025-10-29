@@ -1,19 +1,24 @@
 # ✨ Full Stack Realtime Chat App ✨
 
-### Live Demo
+### 🔗 Live Demo  
 https://chatt-app-mern.vercel.app
+
+## 📸 Screenshot
 <img width="1366" height="768" alt="Chatty" src="https://github.com/user-attachments/assets/f6d9fc08-36d9-4f36-81c7-472f3ccd0a89" />
 
+---
 
-###Highlights:
-- 🌟 Tech stack: MERN + Socket.io + TailwindCSS + Daisy UI
-- 🎃 Authentication && Authorization with JWT
-- 👾 Real-time messaging with Socket.io
-- 🚀 Online user status
-- 👌 Global state management with Zustand
-- 🐞 Error handling both on the server and on the client
-- ⭐ At the end Deployment like a pro for FREE!
-- ⏳ And much more!
+## 🔥 Highlights
+- 🌟 Tech stack: MERN + Socket.io + TailwindCSS + Daisy UI  
+- 🎃 Authentication & Authorization with JWT  
+- 👾 Real-time messaging with Socket.io  
+- 🚀 Online user status  
+- 👌 Global state management with Zustand  
+- 🐞 Error handling both on server & client  
+- ⭐ Deployment for FREE  
+- ⏳ And much more!  
+
+---
 
 ### Setup .env file (backend)
 
